@@ -7,13 +7,18 @@ pipeline {
     stages{
         stage('Build'){
             steps {
-                sh 'mvn clean package -Dmaven.test.skip=true'
+                sh 'mvn clean package'
             }
             post {
                 success {
                     echo 'Archiving the artifacts'
                     archiveArtifacts artifacts: '**/target/*.war'
                 }
+            }
+        }
+        stage('Test'){
+            steps{
+                echo 'Test stage'
             }
         }
 
